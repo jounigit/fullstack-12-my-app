@@ -1,0 +1,31 @@
+{
+  "name": "blogs",
+  "version": "1.0.0",
+  "description": "Fullstack open - Osa 13: relaatiotietokanta",
+  "main": "cli.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "node --test --test-concurrency=1 tests/*.test.js",
+    "migration:down": "node util/db.js --rollback-migrations",
+    "db:up": "docker compose -f docker-compose.db.yml up -d",
+    "db:down": "docker compose -f docker-compose.db.yml down",
+    "seed:db": "./seed.sh",
+    "api:up": "npm run db:up && npm run dev",
+    "frontend:dev": "cd frontend && npm run dev"
+  },
+  "dependencies": {
+    "axios": "^1.13.6",
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "pg": "^8.11.0",
+    "sequelize": "^6.37.8",
+    "umzug": "^3.8.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
