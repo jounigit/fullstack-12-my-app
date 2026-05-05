@@ -24,7 +24,7 @@ export default function EditUserForm({ user }: EditUserFormProps) {
       const result = await action(prevState, formData);
       addOptimistic(result);
       if (result.success) {
-        setTimeout(() => navigate(`/users/${user.id}`), 500);
+        setTimeout(() => navigate(`/users/${result.user.id}`), 500);
       }
       return result;
     },

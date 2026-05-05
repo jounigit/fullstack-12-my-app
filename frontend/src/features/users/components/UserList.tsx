@@ -12,7 +12,7 @@ export default function UserList({ users }: UserListProps) {
       <Link to="/users/create">
         <button>Create New User</button>
       </Link>
-      <table>
+      <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: '20px' }}>
         <thead>
           <tr>
             <th>Name</th>
@@ -30,7 +30,7 @@ export default function UserList({ users }: UserListProps) {
               <td>{user.username}</td>
               <td>{user.blogs?.length ?? 0}</td>
               <td>
-                <Link to={`/users/${user.username}/edit`}>
+                <Link to={`/users/${user.id}/edit`}>
                   <button>Edit</button>
                 </Link>
               </td>

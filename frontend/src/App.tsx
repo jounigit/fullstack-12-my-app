@@ -19,7 +19,7 @@ function App() {
         <Routes>
           <Route path="/users" element={<UsersPage />} />
           <Route path="/users/create" element={<CreateUserPage />} />
-          <Route path="/users/:id" element={<UserDetailPage />} />
+          <Route path="/users/:username" element={<UserDetailPage />} />
           <Route path="/users/:username/edit" element={<EditUserPage />} />
           <Route path="/" element={<Navigate to="/users" replace />} />
         </Routes>

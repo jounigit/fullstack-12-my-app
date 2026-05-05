@@ -1,14 +1,14 @@
 import { Link } from 'react-router-dom';
-import type { User } from '../types';
+import type { User  } from '../types';
 
 interface UserDetailProps {
-  user: User;
+  user: User
 }
 
 export default function UserDetail({ user }: UserDetailProps) {
   return (
     <div>
-      <h2>{user.name}</h2>
+      <h2>{user.name} {user.id}</h2>
       <p>Username: {user.username}</p>
       <p>Created: {new Date(user.createdAt).toLocaleDateString()}</p>
 
@@ -41,9 +41,9 @@ export default function UserDetail({ user }: UserDetailProps) {
         </>
       )}
 
-      <Link to={`/users/${user.username}/edit`}>
+      {/* <Link to={`/users/${user.username}/edit`}>
         <button>Edit</button>
-      </Link>
+      </Link> */}
       <Link to="/users">
         <button>Back to Users</button>
       </Link>

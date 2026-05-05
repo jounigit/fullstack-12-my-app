@@ -2,7 +2,23 @@ const { Model, DataTypes } = require('sequelize');
 const { sequelize } = require('../util/db');
 const Blog = require('./blog');
 
-class User extends Model {}
+class User extends Model {
+  static async findWithReadings(id, readFilter = {}) {
+    return await this.findByPk(id, {
+      attributes: ['username', 'name'],
+      include: {
+        model: Blog,
+        as: 'readings',
+        attributes: ['id', 'url', 'title', 'author', 'likes', 'year'],
+        through: {
+          as: 'reading_list',
+          attributes: ['id', 'read'],
+          where: readFilter
+        }
+      }
+    });
+  }
+}
 User.init({
   id: {
     type: DataTypes.INTEGER,

@@ -30,14 +30,14 @@
   }
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   :root {
-    --text: #9ca3af;
+    --text: #878d97;
     --text-h: #f3f4f6;
     --bg: #16171d;
     --border: #2e303a;
     --code-bg: #1f2028;
-    --accent: #c084fc;
+    --accent: #6b498c;
     --accent-bg: rgba(192, 132, 252, 0.15);
     --accent-border: rgba(192, 132, 252, 0.5);
     --social-bg: rgba(47, 48, 58, 0.5);
@@ -46,7 +46,7 @@
   }
 
   #social .button-icon {
-    filter: invert(1) brightness(2);
+    filter: invert(1) brightness(5);
   }
 }
 
@@ -74,7 +74,7 @@ h2 {
 }
 
 h1 {
-  font-size: 56px;
+  font-size: 36px;
   letter-spacing: -1.68px;
   margin: 32px 0;
   @media (max-width: 1024px) {
