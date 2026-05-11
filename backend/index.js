@@ -9,6 +9,7 @@ const loginRouter = require('./controllers/login');
 const logoutRouter = require('./controllers/logout');
 const authorsRouter = require('./controllers/authors');
 const readingListsRouter = require('./controllers/readinglists');
+const meRouter = require('./controllers/me');
 
 const app = express();
 app.use(cors());
@@ -47,6 +48,7 @@ app.use('/api/login', loginRouter);
 app.use('/api/logout', logoutRouter);
 app.use('/api/authors', authorsRouter);
 app.use('/api/readinglists', readingListsRouter);
+app.use('/api/me', meRouter);
 
 app.use(errorHandler);
 
