@@ -9,8 +9,9 @@ import type { User } from '../features/users/types';
 import { type AuthContextType } from './authTypes';
 import { AuthContext } from './AuthContext';
 import { useNavigate } from 'react-router-dom';
+import config from '../utils/config';
 
-const API_URL = 'http://localhost:3001/api';
+const API_URL = config.API_URL; // Use API_URL from config
 
 interface AuthProviderProps {
   children: ReactNode;

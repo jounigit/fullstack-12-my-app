@@ -1,6 +1,7 @@
 import type { User, CreateUserInput, UpdateUserInput } from '../features/users/types';
+import config from '../utils/config';
 
-const API_URL = 'http://localhost:3001/api';
+const API_URL = config.API_URL; // Use API_URL from config
 
 export const getUsers = async (): Promise<User[]> => {
   const res = await fetch(`${API_URL}/users`);
