@@ -1,4 +1,4 @@
-import type { User, CreateUserInput, UpdateUserInput } from '../features/users/types';
+import type { User, CreateUserInput, UpdateUserInput } from '../types';
 import config from '../utils/config';
 
 const API_URL = config.API_URL; // Use API_URL from config

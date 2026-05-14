@@ -3,10 +3,21 @@ export interface Blog {
   title: string;
   author: string;
   url: string;
-  likes: number;
-  year: number;
+  likes?: number;
+  year?: number;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface CreateBlogInput {
+  title: string;
+  author: string;
+  url: string;
+  year?: number;
+}
+
+export interface UpdateBlogInput {
+  likes: number;
 }
 
 export interface ReadingList {

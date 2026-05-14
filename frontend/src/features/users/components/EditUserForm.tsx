@@ -1,8 +1,8 @@
 import { useActionState, useOptimistic, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { updateUserAction, type ActionState } from '../actions';
-import type { User } from '../types';
-import SubmitButton from './SubmitButton';
+import type { User } from '../../../types';
+import SubmitButton from '../../../components/SubmitButton';
 
 interface EditUserFormProps {
   user: User;
@@ -23,8 +23,8 @@ export default function EditUserForm({ user }: EditUserFormProps) {
     async (prevState: ActionState, formData: FormData) => {
       const result = await action(prevState, formData);
       addOptimistic(result);
-      if (result.success) {
-        setTimeout(() => navigate(`/users/${result.user.id}`), 500);
+      if (result.success && result.user && result.user.id) {
+        setTimeout(() => navigate(`/users/${result.user?.id}`), 500);
       }
       return result;
     },

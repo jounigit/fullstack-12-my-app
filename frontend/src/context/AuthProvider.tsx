@@ -5,7 +5,7 @@ import {
   type ReactNode,
   useCallback
 } from 'react';
-import type { User } from '../features/users/types';
+import type { User } from '../types';
 import { type AuthContextType } from './authTypes';
 import { AuthContext } from './AuthContext';
 import { useNavigate } from 'react-router-dom';
@@ -43,6 +43,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
           } else {
             // Token is invalid, clear it
             localStorage.removeItem('auth_token');
+            setUser(null);
+            navigate('/login');
           }
         }
       } catch (error) {
@@ -53,7 +55,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     };
 
     checkAuth();
-  }, []);
+  }, [navigate]);
 
   // Login function with API call
   const login = useCallback(async (username: string, password: string) => {

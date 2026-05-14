@@ -1,19 +1,20 @@
 
-import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
+import { Routes, Route,  } from 'react-router-dom';
 import './App.css'
 import UsersPage from './pages/UsersPage';
-import UserDetailPage from './pages/UserDetailPage';
-import CreateUserPage from './pages/CreateUserPage';
-import EditUserPage from './pages/EditUserPage';
+// import UserDetailPage from './pages/UserDetailPage';
+// import CreateUserPage from './pages/CreateUserPage';
+// import EditUserPage from './pages/EditUserPage';
 import LoginPage from './pages/LoginPage';
 import { AuthProvider } from './context/AuthProvider';
 import { useAuth } from './context/useAuth';
+import BlogsPage from './pages/BlogsPage';
 
-function RequireAuth() {
-  const { user, isLoading } = useAuth();
-  if (isLoading) return <p>Loading...</p>;
-  return user ? <Outlet /> : <Navigate to="/login" replace />;
-}
+// function RequireAuth() {
+//   const { user, isLoading } = useAuth();
+//   if (isLoading) return <p>Loading...</p>;
+//   return user ? <Outlet /> : <Navigate to="/login" replace />;
+// }
 
 // function LogOutUser() {
 //   const { logout } = useAuth();
@@ -25,18 +26,19 @@ function RequireAuth() {
 // }
 
 function AppNav() {
-  const { user, logout } = useAuth();
+  // const { user, logout } = useAuth();
   return (
     <nav>
+      <div><a href="/blogs">Blogs</a></div>
       <div><a href="/users">Users</a></div>
-      {user ? (
+      {/* {user ? (
         <>
           <div> | {user.name} | </div>
           <button onClick={logout}>Logout</button>
         </>
       ) : (
         <a href="/login">Login</a>
-      )}
+      )} */}
     </nav>
   );
 }
@@ -51,14 +53,15 @@ function App() {
       </header>
       <main>
         <Routes>
+          <Route path="/blogs" element={<BlogsPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/users" element={<UsersPage />} />
-          <Route path="/users/create" element={<CreateUserPage />} />
-          <Route element={<RequireAuth />}>
-            <Route path="/users/:username" element={<UserDetailPage />} />
+          {/* <Route path="/users/create" element={<CreateUserPage />} /> */}
+          {/* <Route element={<RequireAuth />}> */}
+            {/* <Route path="/users/:username" element={<UserDetailPage />} />
             <Route path="/users/:username/edit" element={<EditUserPage />} />
-            <Route path="/" element={<Navigate to="/users" replace />} />
-          </Route>
+            <Route path="/" element={<Navigate to="/users" replace />} /> */}
+          {/* </Route> */}
         </Routes>
       </main>
     </div>

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import type { User  } from '../types';
+import type { User  } from '../../../types';
 
 interface UserDetailProps {
   user: User

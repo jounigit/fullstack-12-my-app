@@ -6,7 +6,7 @@ import useSWR from 'swr';
 export default function UserDetailPage() {
   // const { id } = useParams<{ id: string }>();
   const { username } = useParams<{ username: string }>();
-  const { data: user, error, isLoading } = useSWR(`/api/users/${username}`, () => getUser(username));
+  const { data: user, error, isLoading } = useSWR(`/api/users/${username}`, () => getUser(username!));
 
   if (isLoading) return <p>Loading user...</p>;
   if (error) return <p style={{ color: 'red' }}>{error}</p>;

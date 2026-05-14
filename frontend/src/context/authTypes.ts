@@ -1,4 +1,4 @@
-import type { User } from '../features/users/types';
+import type { User } from '../types';
 
 // User type definition
 // export interface User {
