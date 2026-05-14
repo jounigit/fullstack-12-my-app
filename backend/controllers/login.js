@@ -43,7 +43,10 @@ router.post('/', async (req, res) => {
     token: token
   });
 
-  res.status(200).send({ token, username: user.username, name: user.name });
+  const { passwordHash, ...userWithoutPassword } = user.toJSON();
+
+
+  res.status(200).send({ token, user: userWithoutPassword });
 });
 
 module.exports = router;

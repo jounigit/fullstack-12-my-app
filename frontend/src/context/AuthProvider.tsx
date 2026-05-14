@@ -8,7 +8,9 @@ import {
 import type { User } from '../features/users/types';
 import { type AuthContextType } from './authTypes';
 import { AuthContext } from './AuthContext';
-// import {}
+import { useNavigate } from 'react-router-dom';
+
+const API_URL = 'http://localhost:3001/api';
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -17,16 +19,18 @@ interface AuthProviderProps {
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
   // Check for existing session on mount
   useEffect(() => {
     const checkAuth = async () => {
       try {
         const token = localStorage.getItem('auth_token');
+        console.log('Checking auth with token:', token);
 
         if (token) {
           // Validate token and fetch user data
-          const response = await fetch('/api/me', {
+          const response = await fetch(`${API_URL}/me`, {
             headers: {
               'Authorization': `Bearer ${token}`
             }
@@ -55,7 +59,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     setIsLoading(true);
 
     try {
-      const response = await fetch('/api/login', {
+      const response = await fetch(`${API_URL}/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -72,15 +76,21 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       localStorage.setItem('auth_token', token);
       setUser(userData);
+      navigate('/users');
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [navigate]);
 
   // Logout function to clear session
   const logout = useCallback(async () => {
     try {
-      await fetch('/api/auth/logout', { method: 'POST' });
+      await fetch(`${API_URL}/logout`, { 
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('auth_token')}` 
+        }
+        });
     } catch (error) {
       console.error('Logout API call failed:', error);
     } finally {
@@ -134,4 +144,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
     </AuthContext.Provider>
   );
 }
+
+// function redirectToUsers() {
+//   window.location.href = '/users';
+// }
 
