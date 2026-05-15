@@ -1,5 +1,5 @@
 import { getBlogs } from '../service/blogs';
-import BlogList from '../features/blogs/BlogList';
+import BlogList from '../features/blogs/components/BlogList';
 import useSWR from 'swr';
 
 export default function BlogsPage() {

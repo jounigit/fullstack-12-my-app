@@ -1,7 +1,7 @@
 import type { User, CreateUserInput, UpdateUserInput } from '../types';
 import config from '../utils/config';
 
-const API_URL = config.API_URL; // Use API_URL from config
+const API_URL = config.API_URL // Use API_URL from config
 
 export const getUsers = async (): Promise<User[]> => {
   const res = await fetch(`${API_URL}/users`);
@@ -31,7 +31,9 @@ export const createUser = async (data: CreateUserInput): Promise<User> => {
 export const updateUser = async (username: string, data: UpdateUserInput): Promise<User> => {
   const res = await fetch(`${API_URL}/users/${username}`, {
     method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token') || ''}`
+     },
     body: JSON.stringify(data),
   });
   if (!res.ok) {

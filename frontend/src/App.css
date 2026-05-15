@@ -17,6 +17,15 @@
   }
 }
 
+tr {
+  &:nth-child(even) {
+    background-color: #030000;
+  }
+  &:nth-child(odd) {
+    background-color: #321212;
+  }
+}
+
 .hero {
   position: relative;
 

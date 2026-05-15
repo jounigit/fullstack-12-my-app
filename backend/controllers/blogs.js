@@ -34,6 +34,10 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/:id', blogFinder, async (req, res) => {
+  res.json(req.blog);
+});
+
 router.post('/', tokenExtractor, sessionChecker, async (req, res, next) => {
   try {
     const newBlog = await Blog.create({

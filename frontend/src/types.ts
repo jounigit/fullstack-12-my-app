@@ -49,3 +49,11 @@ export interface UpdateUserInput {
   name: string;
 }
 
+export function isString(value: unknown): value is string {
+  if (typeof value !== 'string') {
+    throw new Error('Expected a string for username');
+  }
+  return typeof value === 'string';
+}
+
+

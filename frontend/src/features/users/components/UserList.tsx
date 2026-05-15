@@ -1,4 +1,4 @@
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import type { User } from '../../../types';
 
 interface UserListProps {
@@ -9,8 +9,7 @@ export default function UserList({ users }: UserListProps) {
   return (
     <div>
       <h2>Users</h2>
-      <div>{users[0].name}</div>
-      {/* <Link to="/users/create">
+      <Link to="/users/create">
         <button>Create New User</button>
       </Link>
       <table style={{ width: '100%', borderCollapse: 'collapse', marginTop: '20px' }}>
@@ -38,7 +37,7 @@ export default function UserList({ users }: UserListProps) {
             </tr>
           ))}
         </tbody>
-      </table> */}
+      </table>
     </div>
   );
 }
