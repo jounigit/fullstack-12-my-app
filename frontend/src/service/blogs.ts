@@ -16,7 +16,7 @@ export const getBlogs = async (): Promise<Blog[]> => {
 
 export const getBlog = async (id: string | number): Promise<Blog> => {
   const res = await fetch(`${API_URL}/blogs/${id}`);
-  if (!res.ok) throw new Error('Failed to fetch blog');
+  if (!res.ok) throw new Error('Failed to fetch blog: ' + res.statusText + ' (ID: ' + id + ')');
   return res.json();
 }
 
@@ -29,6 +29,7 @@ export const createBlog = async (data: CreateBlogInput): Promise<Blog> => {
     body: JSON.stringify(data),
   });
   if (!res.ok) {
+    console.error('Failed to create blog:', res.status, res.statusText);
     const err = await res.json().catch(() => ({ error: 'Failed to create blog' }));
     throw new Error(err.error || 'Failed to create blog');
   }

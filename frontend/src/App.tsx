@@ -10,6 +10,8 @@ import { AuthProvider } from './context/AuthProvider';
 import { useAuth } from './context/useAuth';
 import BlogsPage from './pages/BlogsPage';
 import CreateBlogPage from './pages/CreateBlogPage';
+import { QueryBoundaries } from './features/users/components/QueryBoundaries';
+import React from 'react';
 
 function RequireAuth() {
   const { user, isLoading } = useAuth();
@@ -37,28 +39,33 @@ function AppNav() {
 
 function App() {
   return (
-    <AuthProvider>
+    <QueryBoundaries>
+          <AuthProvider>
       <div className="app">
       <header>
         <h1>Blog App</h1>
         <AppNav />
       </header>
+        
       <main>
-        <Routes>
-          <Route path="/blogs" element={<BlogsPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/users" element={<UsersPage />} />
-          <Route path="/users/create" element={<CreateUserPage />} />
-          <Route element={<RequireAuth />}>
-            <Route path="/users/:username" element={<UserDetailPage />} />
-            <Route path="/users/:username/edit" element={<EditUserPage />} />
-            <Route path="/blogs/create" element={<CreateBlogPage />} />
-            <Route path="/" element={<Navigate to="/users" replace />} />
-          </Route>
-        </Routes>
+        <React.Suspense fallback={<div>Loading...</div>}>
+          <Routes>
+            <Route path="/blogs" element={<BlogsPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/users" element={<UsersPage />} />
+            <Route path="/users/create" element={<CreateUserPage />} />
+            <Route element={<RequireAuth />}>
+              <Route path="/users/:username" element={<UserDetailPage />} />
+              <Route path="/users/:username/edit" element={<EditUserPage />} />
+              <Route path="/blogs/create" element={<CreateBlogPage />} />
+              <Route path="/" element={<Navigate to="/users" replace />} />
+            </Route>
+          </Routes>
+        </React.Suspense>
       </main>
     </div>
     </AuthProvider>
+    </QueryBoundaries>
   )
 }
 

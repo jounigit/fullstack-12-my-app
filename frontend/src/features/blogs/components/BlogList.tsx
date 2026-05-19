@@ -14,6 +14,10 @@ export default function BlogList({ blogs }: BlogListProps) {
   return (
     <div>
       <h2>Blogs</h2>
+      {/* <div style={{ marginBottom: '20px' }}>
+        Test väärä päivitys, joka ei onnistu:
+        <EditBlog id={999} />
+      </div> */}
       <Link to="/blogs/create">
         <button>Create New Blog</button>
       </Link>

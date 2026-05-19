@@ -17,10 +17,11 @@ export default function EditBlog({ id }: Props) {
     throw new Error('Invalid blog ID');
   }
 
-  const { data: blog, error, isLoading } = useSWR(`/api/blogs/${blogId}`, () => getBlog(blogId));
+  const { data: blog, } = useSWR(`/api/blogs/${blogId}`, 
+    () => getBlog(blogId), {suspense: true});
 
-  if (isLoading) return <p>Loading blog...</p>;
-  if (error) return <p style={{ color: 'red' }}>{String(error)}</p>;
+  // if (isLoading) return <p>Loading blog...</p>;
+  // if (error) return <p style={{ color: 'red' }}>{String(error)}</p>;
   if (!blog) return <p>Blog not found</p>;
 
   const incrementLikes = async () => {
