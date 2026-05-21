@@ -4,12 +4,15 @@ import UserDetail from '../features/users/components/UserDetail';
 import useSWR from 'swr';
 
 export default function UserDetailPage() {
-  // const { id } = useParams<{ id: string }>();
-  const { username } = useParams<{ username: string }>();
-  const { data: user, error, isLoading } = useSWR(`/api/users/${username}`, () => getUser(username!));
+  const { id: joku } = useParams<{ id: string }>();
+  const id = Number(joku);
+  if (isNaN(id)) {
+    throw new Error('Invalid user ID');
+  }
+  // const { username } = useParams<{ username: string }>();
+  const { data: user } = useSWR(`/api/users/${id}`, 
+    () => getUser(id));
 
-  if (isLoading) return <p>Loading user...</p>;
-  if (error) return <p style={{ color: 'red' }}>{error}</p>;
   if (!user) return <p>User not found</p>;
 
   return <UserDetail user={user} />;

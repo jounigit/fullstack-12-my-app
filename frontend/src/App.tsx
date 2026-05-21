@@ -12,6 +12,7 @@ import BlogsPage from './pages/BlogsPage';
 import CreateBlogPage from './pages/CreateBlogPage';
 import { QueryBoundaries } from './features/users/components/QueryBoundaries';
 import React from 'react';
+import { Toaster } from 'react-hot-toast';
 
 function RequireAuth() {
   const { user, isLoading } = useAuth();
@@ -42,6 +43,7 @@ function App() {
     <QueryBoundaries>
           <AuthProvider>
       <div className="app">
+      <Toaster position="top-center" />
       <header>
         <h1>Blog App</h1>
         <AppNav />
@@ -55,9 +57,10 @@ function App() {
             <Route path="/users" element={<UsersPage />} />
             <Route path="/users/create" element={<CreateUserPage />} />
             <Route element={<RequireAuth />}>
-              <Route path="/users/:username" element={<UserDetailPage />} />
+              <Route path="/users/:id" element={<UserDetailPage />} />
               <Route path="/users/:username/edit" element={<EditUserPage />} />
               <Route path="/blogs/create" element={<CreateBlogPage />} />
+              {/* <Route path='/users/:id' element={<UserDetailPage />} /> */}
               <Route path="/" element={<Navigate to="/users" replace />} />
             </Route>
           </Routes>

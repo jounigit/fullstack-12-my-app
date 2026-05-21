@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import type { User } from '../../../types';
+import DeleteUser from './DeleteUser';
 
 interface UserListProps {
   users: User[];
@@ -18,7 +19,7 @@ export default function UserList({ users }: UserListProps) {
             <th>Name</th>
             <th>Username</th>
             <th>Blogs</th>
-            <th>Actions</th>
+            <th colSpan={2}>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -33,6 +34,9 @@ export default function UserList({ users }: UserListProps) {
                 <Link to={`/users/${user.id}/edit`}>
                   <button>Edit</button>
                 </Link>
+              </td>
+              <td>
+                <DeleteUser username={user.username} />
               </td>
             </tr>
           ))}

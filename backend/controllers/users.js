@@ -72,19 +72,35 @@ router.post('/', async (req, res, next) => {
   }
 });
 
-router.put('/:username', async (req, res, next) => {
-        try {
-        const user = await User.findOne({ where: { username: req.params.username } });
-        if (!user) {
-            return res.status(404).json({ error: 'User not found' });
-        }
-        user.name = req.body.name;
-        await user.save();
-        res.json(user);
+const userFinder = async (req, res, next) => {
+    req.user = await User.findOne({ where: { username: req.params.username } });
+    if (!req.user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    next();
+};
+
+router.put('/:username', userFinder, async (req, res, next) => {
+     try {         
+        // const user = req.user;   
+        req.user.name = req.body.name;
+        await req.user.save();
+        res.json(req.user);
     } catch (err) {
         console.error('Error:', err);
         next(err);
     }
 }); 
+
+router.delete('/:username', userFinder, async (req, res, next) => {
+    try {
+        const user = req.user;
+        await user.destroy();
+        res.status(204).end();
+    } catch (err) {
+        console.error('Error:', err);
+        next(err);
+    }
+});
 
 module.exports = router;
