@@ -1,9 +1,9 @@
-import { getBlogs } from '../service/blogs';
+
+import { useBlogs } from '../features/blogs/blogHooks';
 import BlogList from '../features/blogs/components/BlogList';
-import useSWR from 'swr';
 
 export default function BlogsPage() {
-  const { data: blogs } = useSWR('/api/blogs', getBlogs, { suspense: true });
+  const { blogs } = useBlogs();
 
   if (!blogs || blogs.length === 0) return <p>No blogs found</p>;
 

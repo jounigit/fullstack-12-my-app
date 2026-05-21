@@ -1,9 +1,9 @@
-import { getUsers } from '../service/users';
+
 import UserList from '../features/users/components/UserList';
-import useSWR from 'swr';
+import { useUsers } from '../features/users/userHooks';
 
 export default function UsersPage() {
-  const { data: users } = useSWR('/api/users', getUsers);
+  const { users } = useUsers();
 
   if (!users || users.length === 0) return <p>No users found</p>;
 
