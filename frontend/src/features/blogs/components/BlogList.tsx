@@ -34,7 +34,7 @@ export default function BlogList({ blogs }: BlogListProps) {
         </thead>
         <tbody>
           {blogs.map((blog) => (
-            <tr key={blog.id} style={{ backgroundColor: '', paddingTop: '40px', paddingBottom: '40px' }}>
+            <tr key={blog.id} style={{ paddingTop: '40px', paddingBottom: '40px' }}>
               <td>{blog.title}</td>
               <td>{blog.author}</td>
               <td>

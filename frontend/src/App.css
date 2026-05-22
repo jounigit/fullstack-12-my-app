@@ -26,6 +26,10 @@ tr {
   }
 }
 
+tr:hover {
+  background-color: #196a10;
+}
+
 .hero {
   position: relative;
 

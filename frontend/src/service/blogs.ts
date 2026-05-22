@@ -22,5 +22,8 @@ export async function updateBlog(id: string | number, data: UpdateBlogInput): Pr
 }
 
 export async function deleteBlog(id: string | number): Promise<void> {
-  await api.delete(`/blogs/${id}`);
+  const res = await api.delete(`/blogs/${id}`);
+  if (res.status !== 204) {
+    throw new Error('Failed to delete blog');
+  }
 }

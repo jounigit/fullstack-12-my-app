@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { Op } = require('sequelize');
 const bcrypt = require('bcrypt');
 const { User, Blog, ReadingLists } = require('../models');
+const { tokenExtractor, sessionChecker } = require('../util/middleware');
 
 router.get('/', async (req, res) => {
   try {
@@ -80,7 +81,7 @@ const userFinder = async (req, res, next) => {
     next();
 };
 
-router.put('/:username', userFinder, async (req, res, next) => {
+router.put('/:username',tokenExtractor, sessionChecker, userFinder, async (req, res, next) => {
      try {         
         // const user = req.user;   
         req.user.name = req.body.name;

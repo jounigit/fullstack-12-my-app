@@ -7,7 +7,7 @@ interface UserDetailProps {
 
 export default function UserDetail({ user }: UserDetailProps) {
   return (
-    <div>
+    <div style={{ backgroundColor: '#000000', marginTop: '40px', paddingTop: '20px'}}>
       <h2>{user.name} {user.id}</h2>
       <p>Username: {user.username}</p>
       <p>Created: {new Date(user.createdAt).toLocaleDateString()}</p>

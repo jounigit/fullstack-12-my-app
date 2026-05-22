@@ -3,7 +3,7 @@ import useSWR from "swr";
 
 export function useUsers() {
   const { data: users } = useSWR("/api/users", getUsers, { suspense: true });
-    console.log("useUsers - users:", users );
+    // console.log("useUsers - users:", users );
   return {
     users,
   };

@@ -15,7 +15,6 @@ export default function DeleteBlog({ id }: DeleteBlogProps) {
       return;
     }
 
-    // try {
       await deleteBlog(id);
       alert('Blog deleted successfully');
       mutate('/api/blogs'); // Refresh the list of blogs
@@ -23,9 +22,6 @@ export default function DeleteBlog({ id }: DeleteBlogProps) {
         navigate('/blogs');
       }, 500);
 
-    // } catch (err) {
-    //   alert(err instanceof Error ? err.message : 'Failed to delete blog');
-    // }
   };
 
   return (
