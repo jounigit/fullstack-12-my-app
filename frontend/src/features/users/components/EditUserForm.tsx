@@ -1,6 +1,6 @@
 import { useActionState, useOptimistic, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { updateUserAction, type ActionState } from '../actions';
+import { updateUserAction, type ActionState } from '../userActions';
 import type { User } from '../../../types';
 import SubmitButton from '../../../components/SubmitButton';
 

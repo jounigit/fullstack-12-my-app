@@ -6,6 +6,7 @@ import { createBlogAction, type ActionState } from '../blogActions';
 export default function CreateBlogForm() {
   const navigate = useNavigate();
   const formRef = useRef<HTMLFormElement>(null);
+  const currentYear = new Date().getFullYear();
 
   const [optimisticState, addOptimistic] = useOptimistic<ActionState, ActionState>(
     { error: null, success: false },
@@ -17,8 +18,9 @@ export default function CreateBlogForm() {
       const result = await createBlogAction(prevState, formData);
       addOptimistic(result);
       if (result.success) {
+        // setTimeout(() => addOptimistic({ error: null, success: false }), 3000);
         formRef.current?.reset();
-        setTimeout(() => navigate('/blogs'), 500);
+        setTimeout(() => navigate('/blogs'), 800);
       }
       return result;
     },
@@ -48,7 +50,7 @@ export default function CreateBlogForm() {
 
         <div>
           <label htmlFor="year">Year (optional):</label>
-          <input type="number" id="year" name="year" min={0} />
+          <input type="number" id="year" name="year" min={1991} max={currentYear} />
         </div>
 
         <SubmitButton label="Create Blog" />

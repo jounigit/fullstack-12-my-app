@@ -1,10 +1,29 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const currentYear: number = new Date().getFullYear();
+
+export type NumberInRange<Min extends number, Max extends number> = number & { __brand: `NumberInRange<${Min}, ${Max}>` };
+
+export function isNumberInRange<Min extends number, Max extends number>(
+  value: unknown,
+  min: Min,
+  max: Max
+): value is NumberInRange<Min, Max> {
+  if (typeof value !== 'number' || !Number.isInteger(value)) {
+    throw new Error(`Expected an integer between ${min} and ${max}`);
+  }
+  if (value < min || value > max) {
+    throw new Error(`Expected a number between ${min} and ${max}`);
+  }
+  return true;
+}
+
 export interface Blog {
   id: number;
   title: string;
   author: string;
   url: string;
   likes?: number;
-  year?: number;
+  year?: NumberInRange<1991, typeof currentYear>;
   createdAt: string;
   updatedAt: string;
 }
@@ -56,4 +75,22 @@ export function isString(value: unknown): value is string {
   return typeof value === 'string';
 }
 
+// type NumberInRange<Min extends number, Max extends number> = number & { __brand: `NumberInRange<${Min}, ${Max}>`; };
 
+// type YearType = {
+//     year?: NumberInRange<1991, new Date().getFullYear()>;
+// };
+
+// export function isNumberInRange<Min extends number, Max extends number>(
+//   value: unknown,
+//   min: Min,
+//   max: Max
+// ): value is NumberInRange<Min, Max> {
+//   if (typeof value !== 'number' || !Number.isInteger(value)) {
+//     throw new Error(`Expected an integer between ${min} and ${max}`);
+//   }
+//   if (value < min || value > max) {
+//     throw new Error(`Expected a number between ${min} and ${max}`);
+//   }
+//   return true;
+// }

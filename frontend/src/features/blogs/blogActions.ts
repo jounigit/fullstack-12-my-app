@@ -1,6 +1,8 @@
 import type { Blog, CreateBlogInput, UpdateBlogInput } from '../../types';
 import { createBlog, deleteBlog, updateBlog } from '../../service/blogs';
 
+
+
 export interface ActionState {
   error: string | null;
   success: boolean;
@@ -81,26 +83,4 @@ export const updateBlogLikesAction =
       };
     }
   }; 
-  
-//   export const updateBlogLikesAction =
-//   (id: string | number) =>
-//   async (_prevState: ActionState, formData: FormData): Promise<ActionState> => {
-//     const likesRaw = getString(formData, 'likes');
-//     const likes = Number(likesRaw);
 
-//     if (!Number.isFinite(likes)) {
-//       return { error: 'Likes must be a number', success: false };
-//     }
-
-//     const input: UpdateBlogInput = { likes };
-
-//     try {
-//       const blog = await updateBlog(id, input);
-//       return { error: null, success: true, blog };
-//     } catch (err) {
-//       return {
-//         error: err instanceof Error ? err.message : 'Failed to update blog',
-//         success: false,
-//       };
-//     }
-//   };

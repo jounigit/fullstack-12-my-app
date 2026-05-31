@@ -85,23 +85,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   }, [navigate]);
 
-  // Logout function to clear session
-  const logout = useCallback(async () => {
-    try {
-      await fetch(`${API_URL}/logout`, { 
-        method: 'DELETE',
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('auth_token')}` 
-        }
-        });
-    } catch (error) {
-      console.error('Logout API call failed:', error);
-    } finally {
-      localStorage.removeItem('auth_token');
-      setUser(null);
-    }
-  }, []);
-
   // Register function for new users
   const register = useCallback(async (
     email: string,
@@ -127,10 +110,29 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
       localStorage.setItem('auth_token', token);
       setUser(userData);
+      navigate('/users');
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [navigate]);
+
+  // Logout function to clear session
+  const logout = useCallback(async () => {
+    try {
+      await fetch(`${API_URL}/logout`, { 
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('auth_token')}` 
+        }
+        });
+    } catch (error) {
+      console.error('Logout API call failed:', error);
+    } finally {
+      localStorage.removeItem('auth_token');
+      setUser(null);
+      navigate('/login');
+    }
+  }, [navigate]);
 
   const value: AuthContextType = {
     user,
