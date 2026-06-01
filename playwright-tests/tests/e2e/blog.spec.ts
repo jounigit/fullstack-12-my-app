@@ -11,6 +11,7 @@ const testBlog = {
 
 test.describe('Blog Page Functionality', () => {
   let user: User;
+  let authToken: string;
 
   test.beforeEach(async ({ request }) => {
     // Create a new user for testing
@@ -22,15 +23,29 @@ test.describe('Blog Page Functionality', () => {
     // Login via API to get token, then seed auth into the browser context.
     // AuthProvider reads localStorage key `auth_token`.
     const { token } = await user.login(request);
+    authToken = token;
     await page.goto('http://localhost:5173/login');
     await page.evaluate((t) => localStorage.setItem('auth_token', t), token);
   });
 
   test.afterEach(async ({ request }) => {
     // Clean up by deleting the test user
-    // login() returns token; pass it to delete() so it won't rely on localStorage.
-    const { token } = await user.login(request);
-    await user.delete(request, token);
+    await user.delete(request, authToken);
+  });
+
+  test.afterAll(async ({ request }) => {
+    // Ensure any remaining test blogs are cleaned up in case of test failure.
+    const blogsResponse = await request.get('http://localhost:3001/api/blogs', {
+      headers: { Authorization: `Bearer ${authToken}` }
+    });
+    const blogs = await blogsResponse.json();
+    const testBlogs = blogs.filter((b: any) => b.title === testBlog.title && b.author === testBlog.author);
+
+    for (const blog of testBlogs) {
+      await request.delete(`http://localhost:3001/api/blogs/${blog.id}`, {
+        headers: { Authorization: `Bearer ${authToken}` }
+      });
+    }
   });
 
   test('Create a new blog post', async ({ page, request }) => {
@@ -81,4 +96,5 @@ test.describe('Blog Page Functionality', () => {
       }
     }
   });
+
 });
