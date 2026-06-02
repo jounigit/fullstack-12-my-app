@@ -1,0 +1,49 @@
+services:
+  app:
+    image: my-app-frontend-dev
+    build:
+      context: ./frontend
+      dockerfile: dev.Dockerfile
+    container_name: my-app-frontend-dev
+    volumes:
+      - ./frontend:/usr/src/app
+
+  server:
+    image: my-app-backend-dev
+    build:
+      context: ./backend
+      dockerfile: dev.Dockerfile
+    volumes:
+      - ./backend:/usr/src/app
+    environment:
+      - DATABASE_URL=postgres://postgres:password@postgres:5432/mydb?sslmode=disable
+    container_name: my-app-backend-dev
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:16
+    container_name: my-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydb
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./backend/postgresDB:/var/lib/postgresql/data
+
+  nginx:
+    image: nginx:1.29-alpine
+    volumes:
+      - ./nginx.dev.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "8080:80"
+    container_name: reverse-proxy
+    depends_on:
+      - app
+      - server
+
+volumes:
+  postgresDB:
+    

@@ -28,4 +28,7 @@ export default defineConfig({
       VITE_API_URL: JSON.stringify(process.env.VITE_API_URL as string),
     },
   },
+  server: {
+    allowedHosts: ['localhost', 'app'],
+  },
 })
