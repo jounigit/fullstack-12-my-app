@@ -5,9 +5,9 @@ import useSWR from 'swr';
 import { isString } from '../types';
 
 export default function EditUserPage() {
-  const { username } = useParams<{ username: string }>();
-  isString(username); // Ensure username is a string for SWR key and getUser function
-  const { data: user, error, isLoading } = useSWR(`/api/users/${username}`, () => getUser(username!));
+  const { id } = useParams<{ id: string }>();
+  isString(id); // Ensure id is a string for SWR key and getUser function
+  const { data: user, error, isLoading } = useSWR(`/api/users/${id}`, () => getUser(Number(id)));
 
   if (isLoading) return <p>Loading user...</p>;
   if (error) return <p style={{ color: 'red' }}>{error}</p>;

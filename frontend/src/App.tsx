@@ -58,7 +58,7 @@ function App() {
             <Route path="/users/create" element={<CreateUserPage />} />
             <Route element={<RequireAuth />}>
               <Route path="/users/:id" element={<UserDetailPage />} />
-              <Route path="/users/:username/edit" element={<EditUserPage />} />
+              <Route path="/users/:id/edit" element={<EditUserPage />} />
               <Route path="/blogs/create" element={<CreateBlogPage />} />
               {/* <Route path='/users/:id' element={<UserDetailPage />} /> */}
               <Route path="/" element={<Navigate to="/users" replace />} />

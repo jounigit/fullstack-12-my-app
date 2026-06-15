@@ -2,8 +2,8 @@ import { describe, it, beforeEach, expect, vi } from 'vitest';
 import type { AxiosError, AxiosRequestConfig } from 'axios';
 
 // Capture interceptor callbacks deterministically.
-let requestHandler: ((c: AxiosRequestConfig) => any) | undefined;
-let responseHandler: ((e: AxiosError) => any) | undefined;
+let requestHandler: ((c: AxiosRequestConfig) => AxiosRequestConfig) | undefined;
+let responseHandler: ((e: AxiosError) => AxiosError) | undefined;
 
 vi.mock('axios', () => {
   return {
@@ -34,7 +34,7 @@ vi.mock('react-hot-toast', () => ({
   },
 }));
 
-const toast = (await import('react-hot-toast')).default as {
+const toast = (await import('react-hot-toast')).default as unknown as {
   error: ReturnType<typeof vi.fn>;
 };
 
