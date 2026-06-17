@@ -1,4 +1,4 @@
-import { getBlogs, getBlog } from "../../service/blogs";
+import { getBlogs, getBlog } from "@service/blogs";
 import useSWR from "swr";
 
 export function useBlogs() {

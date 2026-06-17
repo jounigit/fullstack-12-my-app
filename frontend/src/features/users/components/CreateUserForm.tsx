@@ -1,7 +1,7 @@
 import { useActionState, useOptimistic, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createUserAction, type ActionState } from '../userActions';
-import SubmitButton from '../../../components/SubmitButton';
+import SubmitButton from '@components/SubmitButton';
 
 export default function CreateUserForm() {
   const navigate = useNavigate();

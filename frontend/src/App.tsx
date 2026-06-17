@@ -1,5 +1,5 @@
 
-import { Routes, Route, Navigate, Outlet,  } from 'react-router-dom';
+import { Routes, Route, Navigate, Outlet, Link,  } from 'react-router-dom';
 import './App.css'
 import UsersPage from './pages/UsersPage';
 import UserDetailPage from './pages/UserDetailPage';
@@ -10,6 +10,7 @@ import { AuthProvider } from './context/AuthProvider';
 import { useAuth } from './context/useAuth';
 import BlogsPage from './pages/BlogsPage';
 import CreateBlogPage from './pages/CreateBlogPage';
+import OkPage from './pages/OkPage';
 import { QueryBoundaries } from './features/users/components/QueryBoundaries';
 import React from 'react';
 import { Toaster } from 'react-hot-toast';
@@ -24,15 +25,18 @@ function AppNav() {
   const { user, logout } = useAuth();
   return (
     <nav>
-      <div><a href="/blogs">Blogs</a></div>
-      <div><a href="/users">Users</a></div>
+     <div><Link to="/ok">OK</Link></div>
+      <div><Link to="/blogs">Blogs</Link></div>
+       <div><Link to="/users">Users</Link></div>
+       {/* <div><Link to="/users/create">Create User</Link></div>
+       <div><Link to="/blogs/create">Create Blog</Link></div> */}
       {user ? (
         <>
           <div> | {user.name} | </div>
           <button onClick={logout}>Logout</button>
         </>
       ) : (
-        <a href="/login">Login</a>
+        <div><Link to="/login">Login</Link></div>
       )}
     </nav>
   );
@@ -52,6 +56,7 @@ function App() {
       <main>
         <React.Suspense fallback={<div>Loading...</div>}>
           <Routes>
+            <Route path="/ok" element={<OkPage />} />
             <Route path="/blogs" element={<BlogsPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/users" element={<UsersPage />} />

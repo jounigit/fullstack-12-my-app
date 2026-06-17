@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 import useSWR, { useSWRConfig } from 'swr';
-import { getBlog, updateBlog } from '../../../service/blogs';
+import { getBlog, updateBlog } from '@service/blogs';
 
 interface Props {
   id: number | string;

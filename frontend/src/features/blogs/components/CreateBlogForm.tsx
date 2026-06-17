@@ -1,6 +1,6 @@
 import { useActionState, useOptimistic, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import SubmitButton from '../../../components/SubmitButton';
+import SubmitButton from '@components/SubmitButton';
 import { createBlogAction, type ActionState } from '../blogActions';
 
 export default function CreateBlogForm() {

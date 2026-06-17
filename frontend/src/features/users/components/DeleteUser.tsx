@@ -1,5 +1,5 @@
 import { useSWRConfig } from 'swr';
-import { deleteUser } from '../../../service/users';
+import { deleteUser } from '@service/users';
 import { useNavigate } from 'react-router-dom';
 
 interface DeleteUserProps {

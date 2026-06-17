@@ -1,5 +1,5 @@
 import type { Blog, CreateBlogInput, UpdateBlogInput } from '../../types';
-import { createBlog, deleteBlog, updateBlog } from '../../service/blogs';
+import { createBlog, deleteBlog, updateBlog } from '@service/blogs';
 
 
 

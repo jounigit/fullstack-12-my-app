@@ -75,22 +75,3 @@ export function isString(value: unknown): value is string {
   return typeof value === 'string';
 }
 
-// type NumberInRange<Min extends number, Max extends number> = number & { __brand: `NumberInRange<${Min}, ${Max}>`; };
-
-// type YearType = {
-//     year?: NumberInRange<1991, new Date().getFullYear()>;
-// };
-
-// export function isNumberInRange<Min extends number, Max extends number>(
-//   value: unknown,
-//   min: Min,
-//   max: Max
-// ): value is NumberInRange<Min, Max> {
-//   if (typeof value !== 'number' || !Number.isInteger(value)) {
-//     throw new Error(`Expected an integer between ${min} and ${max}`);
-//   }
-//   if (value < min || value > max) {
-//     throw new Error(`Expected a number between ${min} and ${max}`);
-//   }
-//   return true;
-// }

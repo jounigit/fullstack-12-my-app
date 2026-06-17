@@ -2,7 +2,7 @@ import { useActionState, useOptimistic, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { updateUserAction, type ActionState } from '../userActions';
 import type { User } from '../../../types';
-import SubmitButton from '../../../components/SubmitButton';
+import SubmitButton from '@components/SubmitButton';
 
 interface EditUserFormProps {
   user: User;

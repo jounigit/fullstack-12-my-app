@@ -1,4 +1,4 @@
-import { getUsers, getUser } from "../../service/users";
+import { getUsers, getUser } from "@service/users";
 import useSWR from "swr";
 
 export function useUsers() {

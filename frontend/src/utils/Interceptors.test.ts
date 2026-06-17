@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { describe, it, beforeEach, expect, vi } from 'vitest';
 import type { AxiosError, AxiosRequestConfig } from 'axios';
 
 // Capture interceptor callbacks deterministically.
-let requestHandler: ((c: AxiosRequestConfig) => AxiosRequestConfig) | undefined;
-let responseHandler: ((e: AxiosError) => AxiosError) | undefined;
+let requestHandler: ((c: AxiosRequestConfig) => any) | undefined;
+let responseHandler: ((e: AxiosError) => any) | undefined;
 
 vi.mock('axios', () => {
   return {

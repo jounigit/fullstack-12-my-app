@@ -1,5 +1,5 @@
 import { useSWRConfig } from 'swr';
-import { deleteBlog } from '../../../service/blogs';
+import { deleteBlog } from '@service/blogs';
 import { useNavigate } from 'react-router-dom';
 
 interface DeleteBlogProps {
